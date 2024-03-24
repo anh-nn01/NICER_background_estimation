@@ -4,8 +4,9 @@ Two-stage ML framework for NICER background estimation (spectra &amp; light curv
 Source code for running prediction of NICER background spectra / light curve given MKF parameters of an ObsID in CSV format stored in `./test_obsIDs/MKF_params_{obsID}.csv`
 
 ---
-Script for prediction: <br>
-  ``` python3 run_prediction.py --obsid <ObsID> --output_type <"spec" OR "lc">) ```<br>
+<h2>USAGE </h2> <br>
+
+<b>Script for prediction:</b> ``` python3 run_prediction.py --obsid <ObsID> --output_type <"spec" OR "lc">) ```<br>
 * `--obsid`: input observation ID <br>
 -> Assume the file is CSV file => WE MAY NEED TO CHANGE THIS IMPLEMENTATION FOR RAW .gz files <br>
 -> format: `mkf_path = f"./test_obsIDs/MKF_params_{args.obsid}.csv"` 
@@ -13,6 +14,11 @@ Script for prediction: <br>
 
 * `--output_type`: 'spec' for normalized bkgd spectra prediction
         				 'lc' for bkgd light curve prediction
+
+<b>Expectations:</b>
+1. The `MKF_params_{obsID}.csv` should be available in `./test_obsIDs/` in `.csv` format. <br> <i>We will implement additional functions to process non-CSV formats.</i>
+2. List of MKF variables in the `.csv` file should at least have all MKF parameters specified in `config.input_features` <br>(any extra unused parameters will be discarded)
+3. Any MKF parameter with 1D or 2D representations (e.g: `MPU_*`) is compressed to a numerical value by taking the average.
 
 ---
 Notebooks to train & evaluate the model (both quantitatively & qualitatitvely):
