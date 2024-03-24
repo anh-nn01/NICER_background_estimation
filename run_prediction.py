@@ -45,6 +45,8 @@ def standardize(X):
         feature_mu_sigma = pkl.load(f)
         
     """ 2. Standardization"""
+    X = X[config.input_features] # extract only used MKF variables
+    
     for fname in config.input_features:
         mu, sigma = feature_mu_sigma[fname] # mean & std.dev of each feature
         X[fname] = (X[fname] - mu) / (sigma + 1e-3)
